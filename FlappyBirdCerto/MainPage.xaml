@@ -4,7 +4,7 @@
              x:Class="FlappyBirdCerto.MainPage">
 <Grid>
     <Image Source="ceu.jpg"
-        Aspect="Fill"
+        Aspect="AspectFill"
         HorizontalOptions="Fill"
         VerticalOptions="Fill"/>
     
@@ -28,7 +28,9 @@
 
     <Image Source="grama.png"
          x:Name="grama"
-        WidthRequest="500"
+         Aspect="AspectFit"
+
+        MaximumHeightRequest="200"
         HorizontalOptions="Fill"
         VerticalOptions="End"/>
 
