@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FlappyBirdCerto.MainPage">
+             x:Class="FlappyBirdCerto.MainPage"
+             Shell.NavBarIsVisible="False">
 <Grid>
+<Grid.GestureRecognizers>
+<TapGestureRecognizer Tapped="OnGridClicked"/>
+</Grid.GestureRecognizers>
     <Image Source="ceu.jpg"
         Aspect="AspectFill"
         HorizontalOptions="Fill"
@@ -22,19 +26,20 @@
 
     <Image Source="canobaixo.png"
         x:Name="canobaixo"
-        HeightRequest="290"
+        HeightRequest="300"
         HorizontalOptions="End"
         VerticalOptions="End"/>
 
     <Image Source="grama.png"
+        HeightRequest="50"
          x:Name="grama"
-         Aspect="AspectFit"
+         Aspect="AspectFill"
 
         MaximumHeightRequest="200"
         HorizontalOptions="Fill"
         VerticalOptions="End"/>
 
-     <Frame x:Name="FrameGameOver"
+     <Frame  x:Name="FrameGameOver"
             BackgroundColor="#99000000"
             HorizontalOptions="Fill"
             VerticalOptions="Fill">

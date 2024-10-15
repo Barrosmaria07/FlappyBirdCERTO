@@ -2,59 +2,119 @@
 
 public partial class MainPage : ContentPage
 {
-	const int gravidade=3;
-	const int tempoEntreFrames=25;
-	bool estaMorto=true;
-	double larguraJanela=0;
-	double alturaJanela=0;
-	int velocidade=20;
+	const int gravidade = 3;
+	const int tempoEntreFrames = 25;
+	bool estaMorto = true;
+	double larguraJanela = 0;
+	double alturaJanela = 0;
+	int velocidade = 10;
+	const int maxTempoPulando = 3;
+	int TempoPulando = 0;
+	bool estaPulando = false;
+	const int forcaPulo = 60;
 
 
 
 	public MainPage()
 	{
 		InitializeComponent();
-		
+
 	}
-    protected override void OnSizeAllocated(double width, double height)
-    {
-        base.OnSizeAllocated(width, height);
-		larguraJanela=width;
-    }
-	void GerenciaCanos ()
+	protected override void OnSizeAllocated(double width, double height)
+	{
+		base.OnSizeAllocated(width, height);
+		larguraJanela = width;
+		alturaJanela= height;
+	}
+	void GerenciaCanos()
 	{
 		canocima.TranslationX -= velocidade;
 		canobaixo.TranslationX -= velocidade;
-		if(canobaixo.TranslationX<-larguraJanela)
+		if (canobaixo.TranslationX < -larguraJanela)
 		{
-			canobaixo.TranslationX=0;
-			canocima.TranslationX=0;
+			canobaixo.TranslationX = 0;
+			canocima.TranslationX = 0;
 		}
 	}
-   
-    void AplicaGravidade ()
+
+	void AplicaGravidade()
 	{
-		bird.TranslationY+= gravidade;
+		bird.TranslationY += gravidade;
 	}
-	async Task Desenhar ()
+	async Task Desenhar()
 	{
 		while (!estaMorto)
 		{
-			AplicaGravidade();
-			await Task.Delay(tempoEntreFrames);
+			if (estaPulando)
+				AplicaPulo();
+			else
+				AplicaGravidade();
 			GerenciaCanos();
+			if (VerificaColisao())
+			{
+				estaMorto = true;
+				FrameGameOver.IsVisible = true;
+				break;
+			}
+
+			await Task.Delay(tempoEntreFrames);
 		}
 	}
-	void OnGameOverClicked (object sender, TappedEventArgs args)
+	void AplicaPulo()
+	{
+		bird.TranslationY -= forcaPulo;
+		TempoPulando++;
+		if (TempoPulando >= maxTempoPulando)
+		{
+			estaPulando = false;
+			TempoPulando = 0;
+		}
+	}
+
+	bool VerificaColisao()
+	{
+		if (!estaMorto)
+		{
+			if (VerificaColisaoTeto() ||
+			   VerificaColisaoChao())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool VerificaColisaoTeto()
+	{
+		var minY = -alturaJanela / 2;
+		if (bird.TranslationY <= minY)
+			return true;
+		else
+			return false;
+	}
+
+	bool VerificaColisaoChao()
+	{
+		var maxY = alturaJanela / 2 - grama.HeightRequest;
+		if (bird.TranslationY >= maxY)
+			return true;
+		else
+			return false;
+	}
+	void OnGameOverClicked(object sender, TappedEventArgs args)
 	{
 		FrameGameOver.IsVisible = false;
 		Inicializar();
-		Desenhar ();
+		Desenhar();
 	}
 	void Inicializar()
 	{
-		estaMorto=false;
-		bird.TranslationY=0;
+		estaMorto = false;
+		bird.TranslationY = 0;
+	}
+	void OnGridClicked(object sender, TappedEventArgs args)
+	{
+		estaPulando = true;
 	}
 }
 
