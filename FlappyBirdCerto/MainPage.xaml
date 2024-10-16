@@ -7,7 +7,7 @@
 <Grid.GestureRecognizers>
 <TapGestureRecognizer Tapped="OnGridClicked"/>
 </Grid.GestureRecognizers>
-    <Image Source="ceu.jpg"
+    <Image Source="ceu.png"
         Aspect="AspectFill"
         HorizontalOptions="Fill"
         VerticalOptions="Fill"/>
@@ -20,15 +20,19 @@
 
     <Image Source="canocima.png"
         x:Name="canocima"
-        HeightRequest="290"
+        HeightRequest="500"
+        WidthRequest="50"
         HorizontalOptions="End"
         VerticalOptions="Start"/>
 
     <Image Source="canobaixo.png"
         x:Name="canobaixo"
-        HeightRequest="300"
+        WidthRequest="50"
+        HeightRequest="620"
         HorizontalOptions="End"
         VerticalOptions="End"/>
+
+       
 
     <Image Source="grama.png"
         HeightRequest="50"

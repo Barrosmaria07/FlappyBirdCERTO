@@ -2,16 +2,17 @@
 
 public partial class MainPage : ContentPage
 {
-	const int gravidade = 3;
+	const int gravidade = 7;
 	const int tempoEntreFrames = 25;
 	bool estaMorto = true;
 	double larguraJanela = 0;
 	double alturaJanela = 0;
 	int velocidade = 10;
 	const int maxTempoPulando = 3;
-	int TempoPulando = 0;
+	int TempoPulando = 1;
 	bool estaPulando = false;
-	const int forcaPulo = 60;
+	const int forcaPulo = 40;
+	const int aberturaMinima=10;
 
 
 
@@ -34,6 +35,10 @@ public partial class MainPage : ContentPage
 		{
 			canobaixo.TranslationX = 0;
 			canocima.TranslationX = 0;
+			var alturaMax=-50;
+			var alturaMin=-canobaixo.HeightRequest;
+			canocima.TranslationY=Random.Shared.Next((int)alturaMin, (int)alturaMax);
+			canobaixo.TranslationY=canocima.TranslationY+aberturaMinima+canobaixo.HeightRequest;
 		}
 	}
 
