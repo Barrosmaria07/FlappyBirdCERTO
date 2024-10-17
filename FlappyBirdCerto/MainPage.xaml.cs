@@ -13,6 +13,8 @@ public partial class MainPage : ContentPage
 	bool estaPulando = false;
 	const int forcaPulo = 40;
 	const int aberturaMinima=10;
+	int score=0;
+
 
 
 
@@ -39,6 +41,9 @@ public partial class MainPage : ContentPage
 			var alturaMin=-canobaixo.HeightRequest;
 			canocima.TranslationY=Random.Shared.Next((int)alturaMin, (int)alturaMax);
 			canobaixo.TranslationY=canocima.TranslationY+aberturaMinima+canobaixo.HeightRequest;
+			Score.Text="Score"+score.ToString("D3");
+			score++;
+			end.Text="Sua pontuaçao foi: "+score.ToString("D3");
 		}
 	}
 

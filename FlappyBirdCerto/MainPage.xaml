@@ -11,6 +11,15 @@
         Aspect="AspectFill"
         HorizontalOptions="Fill"
         VerticalOptions="Fill"/>
+
+        <Label  Text="Score:"
+                x:Name="Score"
+                HorizontalOptions="Start"
+                FontFamily="Gamer"
+                TextColor="White"
+                FontSize="60"/>
+
+
     
     <Image Source="bird.png"
         x:Name="bird"
@@ -42,7 +51,8 @@
         MaximumHeightRequest="200"
         HorizontalOptions="Fill"
         VerticalOptions="End"/>
-
+        
+    
      <Frame  x:Name="FrameGameOver"
             BackgroundColor="#99000000"
             HorizontalOptions="Fill"
@@ -50,15 +60,26 @@
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnGameOverClicked"/>
                 </Frame.GestureRecognizers>
+                <VerticalStackLayout>
+                
                  <Image Source ="tap.png"
-                     HeightRequest="100"
-                      WidthRequest="100"
-                      HorizontalOptions="Center"/>
+                     HeightRequest="900"
+                      WidthRequest="200"
+                     />
+
+                      <Label Text=""
+                       x:Name="end"
+                       TextColor="White"
+                       FontFamily="Gamer"
+                       FontSize="80"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       LineBreakMode="WordWrap"/>
 
 
 
 
-            
+                </VerticalStackLayout>
             </Frame>
         </Grid>
 </ContentPage>
